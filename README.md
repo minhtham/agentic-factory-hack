@@ -16,7 +16,7 @@ By participating in this hackathon, you will learn how to:
 - Use GitHub Copilot (including a custom **agentplanning** coding agent) to accelerate development while keeping changes reviewable
 - Add persistent agent memory (threads) and apply it to maintenance scenarios where history matters
 - Instrument the solution so you can inspect agent outputs, tool calls, logs, and traces during development
-- Build an end-to-end agent workflow using Microsoft Agent Framework and sequential orchestration hosted in **Aspire**
+- Build an end-to-end agent workflow using Microsoft Agent Framework and sequential orchestration hosted in **Aspire** with agent-to-agent (A2A) communication.
 
 ## Scenario
 
