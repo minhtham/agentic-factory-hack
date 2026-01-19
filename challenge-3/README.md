@@ -455,4 +455,4 @@ If you want to expand your knowledge on what we’ve covered in this challenge, 
 - [Cosmos DB Best Practices](https://learn.microsoft.com/azure/cosmos-db/nosql/best-practice-dotnet)
 
 ---
-**Next step:** [Challenge 4](../challenge-3/challenge-4.md) - Multi-Agent Orchestration
+**Next step:** [Challenge 4](../challenge-4/README.md) - Multi-Agent Orchestration
