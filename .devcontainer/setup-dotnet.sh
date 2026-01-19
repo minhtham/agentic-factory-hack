@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-echo "🔧 Setting up .NET environment for Challenge 2 and 3..."
+echo "🔧 Setting up .NET environment for Challenge 2 and 4..."
 
 # Create a temporary project to restore packages
 TEMP_DIR="/tmp/dotnet-setup"
