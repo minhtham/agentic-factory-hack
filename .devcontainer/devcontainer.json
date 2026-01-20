@@ -28,7 +28,7 @@
             "installUsingApt": true
         }
     },
-    "postCreateCommand": "pip3 install --user -r requirements.txt && bash .devcontainer/setup-dotnet.sh",
+    "postCreateCommand": "pip3 install --upgrade pip && pip3 install --user -r requirements.txt && bash .devcontainer/setup-dotnet.sh",
     "customizations": {
         "vscode": {
             "extensions": [

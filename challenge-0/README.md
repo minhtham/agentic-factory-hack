@@ -5,6 +5,7 @@ Welcome to your very first challenge! In this challenge, we’ll set the foundat
 If something isn’t working as expected, please let your coach know.
 
 **Expected duration**: 45-60 min
+
 **Prerequisites**:
 
 - **Azure Subscription** with permissions to create resources
@@ -24,7 +25,8 @@ The goals for this challenge are:
 A number of different Azure Resources are used as part of this hackathon.
 
 The following image illustrates the setup:
-![Azure Resources](./images/azure-resources.png)
+
+<img src="./images/challenge-0-azure-resources.png" alt="Azure Resources" width="50%">
 
 All resources reside in a single resource group.
 
@@ -33,7 +35,7 @@ All resources reside in a single resource group.
 - **Cosmos DB** with a database including data for machines, technicians, work orders, and more
 - **Storage Account** with knowledge base wiki articles in Markdown
 - **Application Insights** and **Log Analytics** for logging
-- **AI Search** to query data
+- **AI Search** to query wiki data
 - **Container Registry** and **Container Apps Environment** for running containers
 
 Sample data is seeded into different **Cosmos DB** containers that will be queried during the exercises.
@@ -42,13 +44,13 @@ Sample data is seeded into different **Cosmos DB** containers that will be queri
 
 | Container | Partition Key | Purpose | Sample Count |
 |-----------|--------------|---------|--------------|
-| **Machines** | `/type` | Equipment definitions | 5 machines |
-| **Thresholds** | `/machineType` | Operating limits | 13 thresholds |
-| **Telemetry** | `/machineId` | Sensor readings | 10 samples |
-| **KnowledgeBase** | `/machineType` | Troubleshooting | 10 articles |
-| **PartsInventory** | `/category` | Spare parts | 16 parts |
-| **Technicians** | `/department` | Maintenance staff | 6 technicians |
-| **WorkOrders** | `/status` | Maintenance history | 5 work orders |
+| `Machines` | `/type` | Equipment definitions | 5 machines |
+| `Thresholds` | `/machineType` | Operating limits | 13 thresholds |
+| `Telemetry` | `/machineId` | Sensor readings | 10 samples |
+| `KnowledgeBase` | `/machineType` | Troubleshooting | 10 articles |
+| `PartsInventory` | `/category` | Spare parts | 16 parts |
+| `Technicians` | `/department` | Maintenance staff | 6 technicians |
+| `WorkOrders` | `/status` | Maintenance history | 5 work orders |
 
 </details>
 
@@ -57,32 +59,32 @@ Sample data is seeded into different **Cosmos DB** containers that will be queri
 
 1. **Tire Curing Press A1** (`machine-001`)
    - Type: `tire_curing_press`
-   - Status: Operational
+   - Status: *Operational*
    - Operating Hours: 12,450
    - Cycles Completed: 45,680
-   - Key Metrics: Temperature (165-175°C), Pressure (150-190 bar)
+   - Key Metrics: Temperature (165–175°C), Pressure (150–190 bar)
 
 2. **Tire Building Machine B1** (`machine-002`)
    - Type: `tire_building_machine`
-   - Status: Operational
+   - Status: *Operational*
    - Tires Built: 67,840
    - Key Metrics: Drum vibration, Ply tension
 
 3. **Tire Extruder C1** (`machine-003`)
    - Type: `tire_extruder`
-   - Status: Operational
+   - Status: *Operational*
    - Total Output: 1,245 tons
    - Key Metrics: Barrel temperature, Extrusion pressure
 
 4. **Tire Uniformity Machine D1** (`machine-004`)
    - Type: `tire_uniformity_machine`
-   - Status: ⚠️ Maintenance Required
+   - Status: ⚠️ *Maintenance Required*
    - Tires Inspected: 98,450
    - Key Metrics: Force variation, Balance
 
 5. **Banbury Mixer E1** (`machine-005`)
    - Type: `banbury_mixer`
-   - Status: Operational
+   - Status: *Operational*
    - Batches Completed: 15,670
    - Key Metrics: Mixing temperature, Power consumption
 
@@ -150,7 +152,7 @@ Sample parts with low stock trigger reorder alerts.
 
 ### Task 1: Fork the repository
 
-Before you start, please fork this repository to your GitHub account by clicking the Fork button in the upper right corner of the repository's main screen (or follow the [documentation](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/fork-a-repo#forking-a-repository)). This will allow you to make changes to the repository and save your progress.
+Before you start, please fork this repository to your GitHub account by clicking the *Fork* button in the upper right corner of the repository's main screen (or follow the [documentation](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/fork-a-repo#forking-a-repository)). This will allow you to make changes to the repository and save your progress.
 
 ---
 
@@ -209,6 +211,10 @@ az deployment group create \
 ```
 
 ⏱️ Deployment takes approximately 5-10 minutes
+ 
+> [!TIP]
+> While you are waiting for the deployment to complete, take some time to familiarize yourself with the [hackathon scenario](../README.md#scenario) and [architecture](../README.md#architecture).
+
 
 ### Task 5: Verify the creation of your resources
 
@@ -220,7 +226,7 @@ Go to the [Azure Portal](https://portal.azure.com/) and find your resource group
 
 ### Task 6: Retrieve keys for environment variables
 
-After deploying resources, configure environment variables in the `.env` file. Ensure you're logged into Azure CLI, then run the get-keys script to automatically populate the required values.
+After deploying resources, configure environment variables in the `.env` file. Ensure you're logged into **Azure CLI**, then run the `get-keys.sh` script to automatically populate the required values.
 
 > [!IMPORTANT]
 > Wait until all Azure resources are successfully deployed before starting this task.
@@ -233,18 +239,18 @@ After deploying resources, configure environment variables in the `.env` file. E
 # Verify .env file
 cat ../.env
 
-# Export environment variables
+# Make environment variables available in the shell
 export $(cat ../.env | xargs)
 
 ```
 
 > [!TIP]
 > Keep your `.env` file handy throughout the hackathon.
-> You need to re-export the environment variables each time you open a new shell or when you resume a stopped Codespace.
+> You need to re-export the environment variables each time you open a new shell or when you resume a stopped codespace.
 
 > [!CAUTION]
 > For convenience, we use key-based authentication and public network access to resources in this hackathon. In real-world implementations, you should consider stronger authentication mechanisms and additional network security.
-> Never commit the .env file to the repository. This repo already includes `.env` in [.gitignore](../.gitignore), but if you rename the file you may need to add the new name to [.gitignore](../.gitignore) as well.
+> Never commit the `.env` file to the repository. This repo already includes `.env` in [.gitignore](../.gitignore), but if you rename the file you may need to add the new name to `.gitignore` as well.
 
 ---
 
@@ -301,7 +307,7 @@ This can be done via the Azure Portal Data Explorer. As shown below:
 
 ![Azure Portal Data Explorer](../images/dataexplorer-sample-query.png)
 <details>
-<summary>Find machines with warnings in Telemetry container</summary>
+<summary>Find machines with warnings in the <code>Telemetry</code> container</summary>
 
 ```sql
 SELECT c.machineId, c.status, c.alerts FROM c WHERE c.status = "warning"
@@ -310,7 +316,7 @@ SELECT c.machineId, c.status, c.alerts FROM c WHERE c.status = "warning"
 </details>
 
 <details>
-<summary>Get curing press thresholds in Thresholds container</summary>
+<summary>Get curing press thresholds in the <code>Thresholds</code> container</summary>
 
 ```sql
 SELECT c.metric, c.normalRange, c.warningThreshold, c.criticalThreshold
@@ -321,7 +327,7 @@ WHERE c.machineType = "tire_curing_press"
 </details>
 
 <details>
-<summary>Find available technicians in the Technicians container with curing press skills</summary>
+<summary>Find available technicians with _curing press skills_ in the <code>Technicians</code> container</summary>
 
 ```sql
 SELECT c.name, c.skills, c.availability
@@ -353,8 +359,8 @@ az provider register --namespace Microsoft.App
 
 </details>
 
-<details>  
-<summary>Problem: Seed script fails</summary>
+<details>
+<summary>Problem: <code>seed-data.sh</code> script fails</summary>
 
 ```bash
 # Verify Cosmos DB is ready
@@ -367,7 +373,7 @@ az cosmosdb show \
 az cosmosdb sql container list \
   --account-name $COSMOS_NAME \
   --resource-group $RESOURCE_GROUP \
-  --database-name FactoryOpsDB
+  --database-name "FactoryOpsDB"
 
 # Re-run seed script (idempotent)
 bash challenge-0/seed-data.sh
@@ -376,9 +382,10 @@ bash challenge-0/seed-data.sh
 </details>
 
 <details>
-<summary>Problem: Permission denied on seed script</summary>
+<summary>Problem: Permission denied on <code>seed-data.sh</code></summary>
 
 ```bash
+# Add execute permission to the script
 chmod +x challenge-0/seed-data.sh
 ```
 
