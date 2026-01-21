@@ -21,6 +21,12 @@ Use **bold** for:
 - Important terms on first use: **Overall Equipment Effectiveness (OEE)**
 - Key concepts being introduced: **predictive maintenance**, **multi-agent system**
 
+Do **not** bold common technical terms that appear frequently, such as:
+
+- Programming languages: .NET, C#, Python, JavaScript, TypeScript
+- Frameworks and runtimes: Node.js, React, ASP.NET
+- General technical concepts: API, SDK, JSON, HTTP
+
 ### Italic
 
 Use *italic* for:
@@ -28,6 +34,24 @@ Use *italic* for:
 - UI elements (buttons, menus, tabs): Click the *Fork* button, select the *Data Explorer* tab
 - Emphasis within a sentence: Technicians perform both *proactive* and *reactive* maintenance
 - Conceptual terms being highlighted: The system uses *condition-based* monitoring
+
+### Hyperlinks
+
+Do **not** apply formatting (bold, italic, code) inside link text. Keep link text plain for readability and consistency.
+
+#### ❌ Incorrect
+
+```markdown
+- [Custom agents in **VS Code**](https://example.com)
+- [Learn about `CosmosDbService`](https://example.com)
+```
+
+#### ✅ Correct
+
+```markdown
+- [Custom agents in VS Code](https://example.com)
+- [Learn about CosmosDbService](https://example.com)
+```
 
 ### Code Fence
 

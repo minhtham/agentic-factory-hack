@@ -2,9 +2,9 @@
 
 Welcome to Challenge 2!
 
-In this challenge, you will create an intelligent Repair Planner Agent using .NET that generates comprehensive repair plans and work orders when faults are detected in tire manufacturing equipment. You'll leverage the **@agentplanning** GitHub Copilot agent to guide your development and generate production-ready code.
+In this challenge, you will create an intelligent **Repair Planner Agent** using .NET that generates comprehensive repair plans and work orders when faults are detected in tire manufacturing equipment. You'll leverage the `agentplanning` **GitHub Copilot** agent to guide your development and generate production-ready code.
 
-**Expected Duration:** 30 minutes  
+**Expected Duration:** 45 minutes  
 **Prerequisites**: [Challenge 0](../challenge-0/README.md) successfully completed
 
 ## 🎯 Objective
@@ -12,7 +12,7 @@ In this challenge, you will create an intelligent Repair Planner Agent using .NE
 The goals for this challenge are:
 
 - Pair program with **GitHub Copilot**
-- Create a .NET Agent using the **Foundry Agents SDK**
+- Create a .NET agent using the **Foundry Agents SDK**
 
 ## 🧭 Context and Background
 
@@ -24,11 +24,22 @@ The **Repair Planner Agent** is the third component in our multi-agent system. A
 - Checks parts inventory
 - Creates a structured Work Order
 
-You will implement **Repair Planner Agent** as a .NET application that reads information about Technicians and Parts from **Cosmos DB**. The final work order is also saved in **Cosmos DB**.
+You will implement the **Repair Planner Agent** as a .NET application that reads information about `Technicians` and `PartsInventory` from **Cosmos DB**. The final Work Order is also saved in **Cosmos DB**. The following diagram illustrates the target solution.
 
-![Challenge 2 Azure Resources](./images/challenge-2-azure-resources.png)
+![Challenge 2 Target Solution](./images/challenge-2-target-solution.png)
 
-Mappings between fault → skills and fault → parts are implemented with a static dictionary.
+❶ The **Repair Planner** is a .NET console application with `Program.cs` as its entry point.
+
+❷ The `RepairPlannerAgent.cs` class registers the agent and orchestrates calls to other services.
+
+❸ The `CosmosDbService.cs` class encapsulates **Cosmos DB** data access.
+
+❹ In this exercise, the mappings between faults and required skills/parts are done as a static mapping in `FaultMappingService.cs`. In a real-world application, this would be fetched from another system.
+
+> [!TIP]
+> This is just one way to structure the solution—there are many valid approaches! If you have experience with .NET, feel free to experiment with a different architecture (e.g., dependency injection, separate class libraries, or different layering patterns).
+
+The following mappings are used in this exercise. The `agentplanning` agent already knows these mappings, so you don't need to copy them manually.
 
 <details>
 <summary>
@@ -63,13 +74,13 @@ Fault → Required Skills
 
 ### Using the Custom GitHub Copilot Agent (agentplanning)
 
-GitHub Copilot **custom agents** in VS Code are reusable, task-specific chat personas. A custom agent bundles (1) a set of instructions (how Copilot should behave) and (2) an allowed set of tools (what Copilot can do). This makes it easy to switch into a consistent “mode” (for example, planning vs. implementation) without re-explaining context each time. In a workspace, custom agents are typically defined as `.agent.md` files under `.github/agents`.
+**GitHub Copilot** custom agents in **VS Code** are reusable, task-specific chat personas. A custom agent bundles (1) a set of instructions (how **Copilot** should behave) and (2) an allowed set of tools (what **Copilot** can do). This makes it easy to switch into a consistent "mode" (for example, planning vs. implementation) without re-explaining context each time. In a workspace, custom agents are typically defined as `.agent.md` files under `.github/agents`.
 
-This repository includes a specialized GitHub Copilot agent called `agentplanning` that knows:
+This repository includes a specialized **GitHub Copilot** agent called `agentplanning` that knows:
 
-- Foundry Agents SDK patterns (`Azure.AI.Projects` + `Microsoft.Agents.AI`)
+- **Foundry Agents SDK** patterns (`Azure.AI.Projects` + `Microsoft.Agents.AI`)
 - .NET and C# best practices
-- Cosmos DB integration
+- **Cosmos DB** integration
 - The fault→skills/parts mappings for this workshop
 
 #### Agent-driven development workflow
@@ -86,11 +97,11 @@ Follow this workflow when using the agent planner:
 ## ✅ Tasks
 
 > [!IMPORTANT]
-> The outcome depends on which model GitHub Copilot uses. Larger models (GPT-5.2, Claude Sonnet 4.5) may handle more complex prompts. Smaller models work better with focused, single-file requests.
+> The outcome depends on which model GitHub Copilot uses. Larger models (`GPT-5.2`, `Claude Sonnet 4.5`) may handle more complex prompts. Smaller models work better with focused, single-file requests.
 
 ---
 
-### Task 1: Project Setup
+### Task 1: Project setup
 
 Create a new empty .NET application that will host your agent.
 
@@ -103,28 +114,28 @@ dotnet new console -n RepairPlanner
 
 # Navigate into project
 cd RepairPlanner
-
 ```
 
----
+---  
 
-### Task 2: Create RepairPlanner agent with agentplanning
+### Task 2: Create RepairPlanner agent with `agentplanning`
 
-Open GitHub Copilot Chat (Ctrl+Shift+I or Cmd+Shift+I) and select the `agentplanning` agent in the agent dropdown.
+Open **GitHub Copilot Chat** (Ctrl+Shift+I or Cmd+Shift+I) and select the `agentplanning` agent in the *Agents* dropdown.
 
+<img src="./images/challenge-2-agentplanning-selection.png" alt="agentplanner selection" width="40%">
 
-#### Task 2.1: Architecture Planning
+#### Task 2.1: Architecture planning
 
 Start with the following prompt to understand the proposed setup for the **Repair Planner Agent**.
 
 💬 Ask the agent:
 
 ```
-I need to build a Repair Planner Agent in .NET for Challenge 2 
+I need to build a Repair Planner Agent in .NET for Challenge 2
 using the Foundry Agents SDK. Can you explain the architecture?
 ```
 
-#### Task 2.2: Create Data Models
+#### Task 2.2: Create data models
 
 Now let the agent create the data models.
 
@@ -139,7 +150,7 @@ Create all data models for the Repair Planner Agent:
 - RepairTask (individual repair steps)
 - WorkOrderPartUsage (parts needed)
 
-Use dual JSON attributes for Cosmos DB compatibility.
+Use dual JSON attributes for **Cosmos DB** compatibility.
 ```
 
 <details>
@@ -161,7 +172,7 @@ public sealed class WorkOrder
 
 </details>
 
-#### Task 2.3: Create FaultMappingService
+#### Task 2.3: Create `FaultMappingService`
 
 Create a service for mapping between fault/skills and fault/parts. In this exercise, it will be a static mapping of values, but in a real-world scenario this would be fetched from a dedicated system.
 
@@ -171,7 +182,7 @@ Create a service for mapping between fault/skills and fault/parts. In this exerc
 Create a FaultMappingService that maps fault types to required skills and parts using hardcoded dictionaries.
 ```
 
-#### Task 2.4: Create CosmosDbService
+#### Task 2.4: Create `CosmosDbService`
 
 Let's create the data access service.
 
@@ -234,7 +245,7 @@ namespace RepairPlannerAgent.Services
 ```
 </details>
 
-#### Task 2.5: Create the Main Agent
+#### Task 2.5: Create the main agent
 
 💬 Ask the agent:
 ```
@@ -286,7 +297,7 @@ public sealed class RepairPlannerAgent(
 
 #### Task 2.6: Create the main program
 
-Finally, let `agentplanning` update `Program.cs` to initialize all services and run a sample fault.
+Finally, let the `agentplanning` agent update `Program.cs` to initialize all services and run a sample fault.
 
 💬 Ask the agent:
 
@@ -318,7 +329,7 @@ RepairPlanner/
 
 ---
 
-### Task 3: Test Your Agent
+### Task 3: Test your agent
 
 Try out your agent.
 
@@ -329,9 +340,10 @@ export $(cat ../.env | xargs)
 dotnet run
 ```
 
-Expected Output:
+<details>
+<summary>The output should look similar to this:</summary>
 
-```
+```bash
 12:34:56 info: RepairPlannerAgent[0] Creating agent 'RepairPlannerAgent' with model 'gpt-4o'
 12:34:57 info: RepairPlannerAgent[0] Agent version: abc123
 12:34:57 info: RepairPlannerAgent[0] Planning repair for machine-001, fault=curing_temperature_excessive
@@ -347,11 +359,13 @@ Expected Output:
   "title": "Repair Curing Temperature Issue",
   ...
 }
+
 ```
+</details>
 
 ---
 
-### Task 4 (Optional): Enhancements
+### Task 4 (optional): Enhancements
 
 Once the basic agent works, try adding:
 
@@ -364,19 +378,22 @@ Add better error handling for when no technicians are available
 ```
 
 ```
-Add structured output using AIJsonUtilities.CreateJsonSchema 
-and ChatResponseFormat.ForJsonSchema for type-safe responses
+Add structured output using `AIJsonUtilities.CreateJsonSchema` 
+and `ChatResponseFormat.ForJsonSchema` for type-safe responses
 ```
+
+
+🎉 Congratulations! You've built a **Repair Planner Agent** in .NET using **GitHub Copilot**.
 
 ---
 
 
-## 🛠️ Troubleshooting
+## 🛠️ Troubleshooting and FAQ
 
 <details>
 <summary>Problem: Preview API warnings</summary>
 
-Add this to your `.csproj`:
+Add this to your `RepairPlanner.csproj`:
 
 ```xml
 <NoWarn>$(NoWarn);CA2252</NoWarn>
@@ -396,16 +413,37 @@ NumberHandling = JsonNumberHandling.AllowReadingFromString
 </details>
 
 <details>
-<summary>Problem: Cosmos DB errors</summary>
+<summary>Problem: **Cosmos DB** errors</summary>
 
 Ensure you're using both `[JsonPropertyName]` and `[JsonProperty]` attributes on models.
 
 </details>
 
 <details>
-<summary>Problem: Agent not invoking correctly</summary>
+<summary>Question: Is there a finished example solution available?</summary>
 
-Make sure you call `EnsureAgentVersionAsync()` before `PlanAndCreateWorkOrderAsync()`.
+Yes, there is a complete example solution in the `example-solution/` folder. However, it is **hidden from the VS Code file explorer** by default using filters in [.vscode/settings.json](../.vscode/settings.json).
+
+**Why is it hidden?**  
+The example solution is excluded to prevent **GitHub Copilot** from directly copying it as your solution — which would defeat the purpose of the exercise! The goal is to learn by building the agent yourself with Copilot's guidance, not to have Copilot retrieve a pre-made answer.
+
+**How to view the solution:**  
+If you want to compare your work or need a reference, you can remove or comment out the filter entries in [.vscode/settings.json](../.vscode/settings.json):
+
+```json
+{
+    "files.exclude": {
+        "example-solution": true,           // ← remove or set to false
+        "**/example-solution/**": true
+    },
+    "search.exclude": {
+        "example-solution": true,           // ← remove or set to false
+        "**/example-solution/**": true
+    }
+}
+```
+
+After saving the file, the `example-solution` folder will appear in the Explorer and be included in search results.
 
 </details>
 
@@ -413,26 +451,33 @@ Make sure you call `EnsureAgentVersionAsync()` before `PlanAndCreateWorkOrderAsy
 
 ## 🧠 Conclusion and reflection
 
-🎉 Congratulations! You've built a Repair Planner Agent in .NET using GitHub Copilot.
 
 Let’s reflect on a few things
 
 ### C# vs Python
 
-We used .NET (C#) in this challenge and Python in the previous one — both are **first-class** for building agents with modern AI/agent SDKs (including the Foundry Agents SDK patterns used in this workshop). Agent solutions quickly become application development (integration, data access, security, ops), so teams typically choose the language that best fits their existing stack and skills — Python often excels for rapid iteration, while .NET is common in larger enterprises for long-lived, well-governed services.
+We used .NET (C#) in this challenge and Python in the previous one — both are **first-class** for building agents with modern AI/agent SDKs (including the **Foundry Agents SDK** patterns used in this workshop). Agent solutions quickly become application development (integration, data access, security, ops), so teams typically choose the language that best fits their existing stack and skills — Python often excels for rapid iteration, while .NET is common in larger enterprises for long-lived, well-governed services.
 
 ### GitHub Copilot instructions
 
-This repo uses **VS Code Copilot customization** so the agent behaves consistently during the workshop.
+This repo uses **VS Code** Copilot customization so the agent behaves consistently during the workshop.
 
 > [!TIP]
 > Using guided agents (clear instructions + constrained tools + repeatable steps) helps avoid “vibe coding”, where solutions can drift, skip requirements, or become hard to review. A lightweight, guided approach keeps changes aligned with the goal and makes agent output easier to validate.
 
 ![GitHub Copilot instructions](./images/challenge-2-copilot-instructions.png)
 
-What’s being used in this repo:
+The diagram above illustrates how **GitHub Copilot** combines multiple inputs to generate contextual responses:
 
-This workshop includes a workspace custom agent at [agentplanning.agent.md](../.github/agents/agentplanning.agent.md), discovered by VS Code from `.github/agents/*.agent.md` and selectable from the Copilot Chat **Agents** dropdown. It also includes workspace-wide custom instructions in [copilot-instructions.md](../.github/copilot-instructions.md), which (when instruction files are enabled) are applied automatically to chat requests to enforce the workshop constraints (SDK choice, pinned package versions, environment variables, etc.).
+❶ **Your prompt** — The primary instruction you provide to the agent (e.g., "Create the RepairPlannerAgent class..."). This is your direct request that drives the conversation.
+
+❷ **Custom instructions** — Two types of instruction files shape Copilot's behavior:
+   - [copilot-instructions.md](../.github/copilot-instructions.md) — General workspace-wide instructions applied to all chat requests (SDK constraints, pinned package versions, environment variables, etc.)
+   - [agentplanning.agent.md](../.github/agents/agentplanning.agent.md) — The specific role and persona for the `agentplanning` agent, discovered by **VS Code** from `.github/agents/*.agent.md` and selectable from the *Agents* dropdown
+
+❸ **Workspace context** — Copilot examines files in your workspace to understand structure and data, such as `README.md`, `technicians.json`, `work-orders.json`, and your existing code files. This helps it generate code that fits your project.
+
+❹ **Tools and data (MCP)** — Copilot can be equipped with additional tools exposed via the Model Context Protocol (MCP) to accomplish more complex tasks. **This is very similar to how our agents in [challenge 1](../challenge-1/README.md) were equipped with tools** — just as we gave the **Fault Diagnoses Agent** access to **Cosmos DB** queries and a knowledge base, you can extend Copilot with external data sources and capabilities.
 
 
 If you want to expand your knowledge on what we’ve covered in this challenge, have a look at the content below:
