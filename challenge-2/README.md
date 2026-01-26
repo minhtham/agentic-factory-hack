@@ -425,7 +425,7 @@ and `ChatResponseFormat.ForJsonSchema` for type-safe responses
 <details>
 <summary>Add an MCP server to GitHub Copilot</summary>
 
-In Challenge 1, you saw how agents in **Azure AI Foundry Agent Service** can use MCP tools. **GitHub Copilot** in VS Code also supports MCP servers, letting you extend Copilot's capabilities with custom tools.
+In Challenge 1, you saw how agents in **Foundry Agent Service** can use MCP tools. **GitHub Copilot** in VS Code also supports MCP servers, letting you extend Copilot's capabilities with custom tools.
 
 Try adding the **Microsoft Learn MCP server** to your **GitHub Copilot** setup:
 

@@ -323,7 +323,7 @@ Out of 2 anomaly records reviewed for machine-001 (Tire Curing Press A1), one vi
 
 #### Task 2.5. Review and test the agent in Foundry Portal
 
-1. Navigate to [**Microsoft Foundry Portal**](https://ai.azure.com).
+1. Navigate to [**Foundry Portal**](https://ai.azure.com).
 
 > [!TIP]
 > Make sure you are using the new Foundry portal experience.  
@@ -550,10 +550,10 @@ This agent also runs fully in **Agent Service** and can use the tools when answe
 
 If you want to expand your knowledge on what we’ve covered in this challenge, have a look at the content below:
 
-- [Connect to **Model Context Protocol** servers](https://learn.microsoft.com/en-us/azure/ai-foundry/agents/how-to/tools/model-context-protocol?view=foundry&pivots=python)
-- [Create a knowledge base in **Azure AI Search**](https://learn.microsoft.com/en-us/azure/search/agentic-retrieval-how-to-create-knowledge-base?tabs=rbac&pivots=python)
+- [Connect to Model Context Protocol servers](https://learn.microsoft.com/en-us/azure/ai-foundry/agents/how-to/tools/model-context-protocol?view=foundry&pivots=python)
+- [Create a knowledge base in Azure AI Search](https://learn.microsoft.com/en-us/azure/search/agentic-retrieval-how-to-create-knowledge-base?tabs=rbac&pivots=python)
 - [What is a knowledge source?](https://learn.microsoft.com/en-us/azure/search/agentic-knowledge-source-overview)
-- [Connect a **Foundry IQ** knowledge base to **Foundry Agent Service**](https://learn.microsoft.com/en-us/azure/ai-foundry/agents/how-to/tools/knowledge-retrieval?view=foundry&tabs=foundry%2Cpython)
+- [Connect a Foundry IQ knowledge base to Foundry Agent Service](https://learn.microsoft.com/en-us/azure/ai-foundry/agents/how-to/tools/knowledge-retrieval?view=foundry&tabs=foundry%2Cpython)
 - [Azure AI Inference client library for Python](https://learn.microsoft.com/en-us/python/api/overview/azure/ai-inference-readme?view=azure-python-preview)
 
 ---

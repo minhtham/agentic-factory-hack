@@ -129,7 +129,7 @@ The following challenges are included in this hackathon:
 - **Challenge 0**: **[Environment Setup & Data Foundation](challenge-0/README.md)** — Set up your development environment, deploy Azure resources, configure environment variables, and seed sample factory data with 5 machines including pre-seeded warning conditions.
 - **Challenge 1**: **[Anomaly Detection and Fault Diagnosis Agents](challenge-1/README.md)** — Build an **Anomaly Detection Agent** that monitors IoT telemetry from tire manufacturing equipment, compares readings against thresholds, and classifies anomalies.
 - **Challenge 2**: **[Repair Planner Agent and AI-Driven Development](challenge-2/README.md)** — Learn agent-driven development with **GitHub Copilot** by using the `agentplanning` agent to guide you through building a **Repair Planner Agent** in .NET.
-- **Challenge 3**: **[Maintenance Scheduler & Parts Ordering Agents with Memory and Observability](challenge-3/README.md)** — Build **Maintenance Scheduler** and **Parts Ordering** agents using **Microsoft Foundry's** persistent memory layer to maintain context across sessions, and explore agent traceability for observability.
+- **Challenge 3**: **[Maintenance Scheduler & Parts Ordering Agents with Memory and Observability](challenge-3/README.md)** — Build **Maintenance Scheduler** and **Parts Ordering** agents using **Foundry's** persistent memory layer to maintain context across sessions, and explore agent traceability for observability.
 - **Challenge 4**: **[Multi-Agent Orchestration](challenge-4/README.md)** — Create the workflow of these 5 agents using **Microsoft Agent Framework** and run it in **Aspire**.
 
 > [!TIP]

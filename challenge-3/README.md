@@ -99,6 +99,12 @@ The conversation history is injected into the AI prompt as context, so the model
 
 Both agents are instrumented for **end-to-end observability** so you can debug runs and understand model behavior without adding print statements everywhere.
 
+**Why observability matters:** When running agents in production, you need visibility into what's happening:
+- **Identify bottlenecks**: See which steps take the longest (AI inference vs. database operations)
+- **Debug failures**: When an agent fails, traces show exactly which step failed and why
+- **Monitor costs**: Token usage metrics help you understand and optimize AI spending
+- **Validate behavior**: Confirm that agents are making reasonable decisions by reviewing their reasoning
+
 **What's included:**
 - **Azure Monitor Integration** - Sends traces to **Application Insights**
 - **AI Inference Instrumentation** - Automatically traces all AI model calls
@@ -117,7 +123,7 @@ Tracing is automatically enabled when you run the agents if:
 1. Tracing packages are installed (already included in `requirements.txt`)
 2. `APPLICATIONINSIGHTS_CONNECTION_STRING` environment variable is set (configured in `.env`)
 
-The agents use **Azure Monitor** exporters to send traces, metrics, and logs directly to **Application Insights**, which integrates with **Azure AI Foundry** portal.
+The agents use **Azure Monitor** exporters to send traces, metrics, and logs directly to **Application Insights**, which integrates with **Foundry** portal.
 
 <details>
 <summary>Tracing dependencies (already installed)</summary>
@@ -353,22 +359,16 @@ No parts order needed.
 
 ### Task 3: Azure AI Tracing & Observability
 
-This challenge uses **Azure AI Foundry** tracing so you can inspect runs in the portal.
-
-**Why observability matters:** When running agents in production, you need visibility into what's happening. The batch script processes 5 work orders through both agents, generating 10 total agent runs. By examining the traces, you can:
-- **Identify bottlenecks**: See which steps take the longest (AI inference vs. database operations)
-- **Debug failures**: When an agent fails, traces show exactly which step failed and why
-- **Monitor costs**: Token usage metrics help you understand and optimize AI spending
-- **Validate behavior**: Confirm that agents are making reasonable decisions by reviewing their reasoning
+Now let's generate some trace data and explore it in the **Foundry** portal.
 
 #### Task 3.1: Generate traces
-Generate some trace data by running a batch script [run-batch.py](./run-batch.py) which will process 5 work orders through each agent.
+Generate some trace data by running a batch script [run-batch.py](./run-batch.py) which will process 5 work orders through each agent, generating 10 total agent runs.
 
 ```bash
 python run-batch.py
 ```
 
-#### Task 3.2: View traces in Azure AI Foundry
+#### Task 3.2: View traces in Foundry
 
 1. Go to <https://ai.azure.com>
 2. Select your project
@@ -459,9 +459,9 @@ Explore how the agents handle edge cases:
 ## 🛠️ Troubleshooting and FAQ
 
 <details>
-<summary>Problem: I don't see my traces in Azure AI Foundry portal</summary>
+<summary>Problem: I don't see my traces in Foundry portal</summary>
 
-There can be a delay of **2-5 minutes** before metrics and traces appear in the **Azure AI Foundry** portal. This is normal behavior as data is batched and processed before being displayed.
+There can be a delay of **2-5 minutes** before metrics and traces appear in the **Foundry** portal. This is normal behavior as data is batched and processed before being displayed.
 
 **What to do:**
 1. Wait a few minutes and refresh the portal
@@ -484,7 +484,7 @@ In [Task 2](#task-2-run-parts-ordering-agent) we created the **Parts Ordering Ag
 
 <img src="./images/challenge-3-task-2.png" alt="Task 2" width="50%">
 
-Finally, in [Task 3](#task-3-azure-ai-tracing--observability) we used **Azure AI Foundry tracing** to observe the end-to-end workflow, including data access and model calls. This is useful for **production monitoring and debugging** - identifying performance bottlenecks, tracking token usage and costs, debugging failures with full context, and validating that agents are making reasonable decisions by reviewing their reasoning in the traces.
+Finally, in [Task 3](#task-3-azure-ai-tracing--observability) we used **Foundry** tracing to observe the end-to-end workflow, including data access and model calls. This is useful for **production monitoring and debugging** - identifying performance bottlenecks, tracking token usage and costs, debugging failures with full context, and validating that agents are making reasonable decisions by reviewing their reasoning in the traces.
 
 <img src="./images/challenge-3-task-3.png" alt="Task 3" width="50%">
 
@@ -507,7 +507,7 @@ However, this comes with tradeoffs. If we wanted the agent to adaptively fetch a
 
 If you want to expand your knowledge on what we’ve covered in this challenge, have a look at the content below:
 
-- [Azure AI Foundry Tracing Documentation](https://learn.microsoft.com/azure/ai-foundry/how-to/develop/trace-agents-sdk)
+- [Foundry Tracing Documentation](https://learn.microsoft.com/azure/ai-foundry/how-to/develop/trace-agents-sdk)
 - [Application Insights Overview](https://learn.microsoft.com/azure/azure-monitor/app/app-insights-overview)
 - [Microsoft Agent Framework Documentation](https://learn.microsoft.com/azure/ai-foundry/how-to/develop/agent-framework)
 - [Cosmos DB Best Practices](https://learn.microsoft.com/azure/cosmos-db/nosql/best-practice-dotnet)

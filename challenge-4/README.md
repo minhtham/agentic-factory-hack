@@ -54,7 +54,7 @@ This solution includes different types of agents:
 
 - **Anomaly Classification Agent** and **Fault Diagnosis Agent**
 	- Defined in Python
-	- Running fully in **Azure AI Foundry Agent Service** (no local execution)
+	- Running fully in **Foundry Agent Service** (no local execution)
 - **Repair Planner Agent**
 	- Implemented in C#
 	- Runs with local logic and direct access to data sources like **Cosmos DB**
@@ -103,7 +103,7 @@ The **Agent Framework** supports several orchestration patterns, each suited to 
 ## ✅ Tasks
 
 > [!IMPORTANT]
-> The Challenge 4 workflow expects the **Anomaly Classification** and **Fault Diagnosis** agents to be hosted in **Azure AI Foundry Agent Service**.
+> The Challenge 4 workflow expects the **Anomaly Classification** and **Fault Diagnosis** agents to be hosted in **Foundry Agent Service**.
 > Make sure you have completed [Challenge 1](../challenge-1/README.md) before starting the workflow.
 
 
@@ -305,15 +305,15 @@ The diagram above illustrates the full workflow in 9 steps:
 
 ❷ The **agent framework workflow** (implemented in .NET) is triggered.
 
-❸ The workflow invokes the **Anomaly Classification Agent** running in **Azure AI Foundry Agent Service**.
+❸ The workflow invokes the **Anomaly Classification Agent** running in **Foundry Agent Service**.
 
 ❹ The **Anomaly Classification Agent** uses remote MCP tools to call **API Management** and fetch required data.
 
-❺ The workflow invokes the **Fault Diagnosis Agent** running in **Azure AI Foundry Agent Service**.
+❺ The workflow invokes the **Fault Diagnosis Agent** running in **Foundry Agent Service**.
 
 ❻ The **Fault Diagnosis Agent** uses remote MCP tools to call **API Management** and query **Azure AI Search**.
 
-❼ The workflow invokes the **Repair Planner Agent** locally via A2A, running in a separate .NET process. It still uses the agent registration in **Azure AI Foundry**, but executes its logic locally.
+❼ The workflow invokes the **Repair Planner Agent** locally via A2A, running in a separate .NET process. It still uses the agent registration in **Foundry**, but executes its logic locally.
 
 ❽ The **Repair Planner Agent** queries **Cosmos DB** locally to retrieve operational data.
 
@@ -343,7 +343,7 @@ If you want to expand your knowledge on what we've covered in this challenge, ha
 
 - [Microsoft Agent Framework Workflows](https://learn.microsoft.com/en-us/agent-framework/user-guide/workflows/overview)
 - [What is .NET Aspire?](https://aspire.dev/get-started/what-is-aspire/)
-- [Agent-to-Agent in Azure AI Foundry](https://learn.microsoft.com/en-us/azure/ai-foundry/agents/how-to/tools/agent-to-agent?view=foundry&pivots=python)
+- [Agent-to-Agent in Foundry](https://learn.microsoft.com/en-us/azure/ai-foundry/agents/how-to/tools/agent-to-agent?view=foundry&pivots=python)
 - [Agent-to-Agent API in Azure API Management](https://learn.microsoft.com/en-us/azure/api-management/agent-to-agent-api)
 - [DevUI for Agent Framework](https://learn.microsoft.com/en-us/agent-framework/user-guide/devui/?pivots=programming-language-csharp)
 
