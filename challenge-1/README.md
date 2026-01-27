@@ -502,6 +502,30 @@ Use the **Foundry Portal** playground to test boundary conditions:
 ## 🛠️ Troubleshooting and FAQ
 
 <details>
+<summary>Problem: <code>Connection 'xxx-connection' not found</code> error when running agents</summary>
+
+You may occasionally see an error like:
+```
+Error code: 400 - {'error': {'message': "Connection 'machine-data-connection' not found.", ...}}
+```
+
+This is a **known intermittent issue** with Azure AI Foundry's MCP connection resolution (the service is in preview). The connections exist but are not always resolved correctly by the agent runtime.
+
+**Workarounds:**
+1. **Run the script again** — the error is transient and often succeeds on retry
+2. **Test in the Foundry Portal playground** — if the agent was created, you can test it there
+3. **Wait a few minutes** — connection state may need time to propagate
+
+You can verify connections exist by running:
+```bash
+az rest --method GET \
+  --url "https://management.azure.com${AZURE_AI_PROJECT_RESOURCE_ID}/connections?api-version=2025-10-01-preview" \
+  --query "value[].name" -o tsv
+```
+
+</details>
+
+<details>
 <summary>Problem: the agent doesn't show up in the new <b>Foundry Portal</b></summary>
 There can be a certain delay before newly created agents are visible in the **Foundry Portal**. If you don't see the agent after 10 minutes, try refreshing the browser or run the Python script again.
 </details>

@@ -391,7 +391,7 @@
       "apiVersion": "2025-04-01-preview",
       "name": "[format('{0}/{1}', variables('aiFoundryName'), 'text-embedding-ada-002')]",
       "sku": {
-        "capacity": 50,
+        "capacity": 10,
         "name": "Standard"
       },
       "properties": {
